@@ -16,7 +16,9 @@
             <form id="form">
                 <h1>How long did Aajonus share this realm with you?</h1>
                 <label for="dob">Your date of birth:</label>
-                <input type="date" id="dob" name="trip-start" min="1900-01-01" max="2013-08-28">
+                <input type="number" name="day" id="dobDay" placeholder="DD" min="1" max="31" size="4">
+                <input type="number" name="month" id="dobMonth" placeholder="MM" min="1" max="12" size="4">
+                <input type="number" name="year" id="dobYear" placeholder="YYYY" min="1900" max="2013" size="6">
                 <button type="submit">Tell me</button>
             </form>
         </div>
@@ -36,7 +38,9 @@
     <script src="js/moment-precise-range.js"></script>
     <script>
         const $form = document.getElementById("form");
-        const $dob = document.getElementById("dob");
+        const $dobDay = document.getElementById("dobDay");
+        const $dobMonth = document.getElementById("dobMonth");
+        const $dobYear = document.getElementById("dobYear");
         const $answer = document.getElementById("answer");
         const $range = document.getElementById("range");
         const $copy = document.getElementById("copy");
@@ -48,7 +52,15 @@
 
         function handleSubmit(e) {
             e.preventDefault();
-            const userDob = moment($dob.value);
+            const day = ("0" + $dobDay.value).slice(-2);
+            const month = ("0" + $dobMonth.value).slice(-2);
+            const year = $dobYear.value;
+
+            if ($dobDay.value === "" || $dobMonth.value === "" || $dobYear.value === "") {
+                return false;
+            }
+
+            const userDob = moment(`${year}-${month}-${day}`);
             const subtrahendDate = moment.max(userDob, avDob);
             let range = moment.preciseDiff(avDod, subtrahendDate);
 
