@@ -1,0 +1,70 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;;
+}
+
+h1 {
+    color: darkred;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: .5em 0;
+    max-width: 10em;
+}
+
+form {
+    margin: 0 auto;
+    max-width: 20em;
+}
+
+input,
+button {
+    font-family: inherit;
+}
+
+svg {
+    vertical-align: middle;
+}
+
+.container {
+    margin: 1em auto;
+    max-width: 40em;
+    padding: 0 1em;
+}
+
+#av {
+    display: block;
+    margin: 0 auto;
+}
+
+#answer {
+    display: none;
+    font-size: 1.5rem;
+    margin: 1em auto;
+    max-width: 13.3em;
+}
+
+.number {
+    color: steelblue;
+    font-weight: bold;
+}
+
+@media (min-width: 550px) {
+    .columns {
+        display: flex;
+    }
+
+    #av {
+        margin-right: 1em;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    #answer {
+        max-width: 100%;
+    }
+}

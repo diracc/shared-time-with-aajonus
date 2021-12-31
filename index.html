@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared time with Aajonus</title>
+    <link rel="stylesheet" href="css/minireset.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="columns">
+            <img src="av.gif" id="av" width="200" height="200" alt="">
+            <form id="form">
+                <h1>How long did Aajonus share this realm with you?</h1>
+                <label for="dob">Your date of birth:</label>
+                <input type="date" id="dob" name="trip-start" min="1900-01-01" max="2013-08-28">
+                <button type="submit">Tell me</button>
+            </form>
+        </div>
+        <div id="answer">
+            <span>You had the honor to share this realm with Aajonus for: <span id="range"></span></span>
+            <button id="copy">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+                    <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                </svg> <span>Copy</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/moment.js"></script>
+    <script src="js/moment-precise-range.js"></script>
+    <script>
+        const $form = document.getElementById("form");
+        const $dob = document.getElementById("dob");
+        const $answer = document.getElementById("answer");
+        const $range = document.getElementById("range");
+        const $copy = document.getElementById("copy");
+        const avDob = moment("1947-04-17");
+        const avDod = moment("2013-08-28");
+
+        $form.addEventListener("submit", handleSubmit);
+        $copy.addEventListener("click", copy);
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            const userDob = moment($dob.value);
+            const subtrahendDate = moment.max(userDob, avDob);
+            let range = moment.preciseDiff(avDod, subtrahendDate);
+
+            if (range !== "") {
+                range = range.replace(/(\d+)/g, "<span class='number'>$1</span>");
+                $range.innerHTML = range;
+                $copy.getElementsByTagName("span")[0].innerText = "Copy"; // Reset
+                $answer.style.display = "block";
+            }    
+        }
+
+        function copy() {
+            const $copyLabel = $copy.getElementsByTagName("span")[0];
+            const text = $answer.getElementsByTagName("span")[0].innerText;
+
+            navigator.clipboard.writeText(text)
+                .then(function () {
+                    $copyLabel.innerText = "Copied.";
+                })
+                .catch(function (err) {
+                    $copyLabel.innerText = "Unable to copy."
+                });
+        }
+
+    </script>
+</body>
+</html>
