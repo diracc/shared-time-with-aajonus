@@ -57,19 +57,16 @@ svg {
 }
 
 @media (min-width: 550px) {
+    form,
+    #answer {
+        max-width: 100%;
+    }
+
     .columns {
         display: flex;
     }
 
     #av {
         margin-right: 1em;
-    }
-
-    form {
-        max-width: 100%;
-    }
-
-    #answer {
-        max-width: 100%;
     }
 }
